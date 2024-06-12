@@ -15,7 +15,9 @@ const App = () => {
 	}, []);
 
 	const fetchRandomSentence = async () => {
-		const response = await fetch("https://api.quotable.io/random");
+		const response = await fetch(
+			"https://api.quotable.io/random?maxLength=80"
+		);
 		const data = await response.json();
 		setText(data.content);
 		resetGame();
@@ -78,19 +80,22 @@ const App = () => {
 	}, [input]);
 
 	return (
-		<div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
-			<h1 className="text-4xl mb-8 text-black">Agotype</h1>
+		<div className="h-screen w-screen max-w-screen max-h-screen flex flex-col items-center justify-center bg-gray-100">
+			<h1 className="text-4xl mb-8 text-black">ago-type!</h1>
 			<div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-3/4 md:w-1/2">
 				<div className="text-lg mb-4 text-gray-700">
 					{renderTextWithErrors()}
 				</div>
 				<textarea
+					id="input"
 					className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 					value={input}
 					onChange={handleChange}
 					placeholder="Start typing..."
 					rows="4"
 					disabled={completed} // Disabilita la textarea se il gioco è completato
+					autoFocus
+					onBlur={(e) => e.target.focus()} // Rimette il focus sulla textarea se si clicca fuori
 				></textarea>
 				{endTime && (
 					<div className="mt-4">
