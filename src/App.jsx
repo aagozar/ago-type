@@ -3,6 +3,7 @@ import "./App.css";
 
 const App = () => {
 	const [text, setText] = useState("");
+	const [author, setAuthor] = useState("");
 	const [input, setInput] = useState("");
 	const [startTime, setStartTime] = useState(null);
 	const [endTime, setEndTime] = useState(null);
@@ -21,6 +22,7 @@ const App = () => {
 		const data = await response.json();
 		console.log(data);
 		setText(data.content);
+		setAuthor(data.author);
 		resetGame();
 	};
 
@@ -45,7 +47,9 @@ const App = () => {
 			let className = "";
 			if (index < input.length) {
 				className =
-					char === input[index] ? "text-green-500" : "text-red-500";
+					char === input[index]
+						? "text-green-500"
+						: "underline decoration-red text-red-500";
 			} else {
 				className = "text-gray-700";
 			}
@@ -84,9 +88,13 @@ const App = () => {
 		<div className="h-screen w-screen max-w-screen max-h-screen flex flex-col items-center justify-center bg-gray-100">
 			<h1 className="text-4xl mb-8 text-black">ago-type!</h1>
 			<div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-3/4 md:w-1/2">
-				<div className="text-5xl mb-4 text-gray-700">
-					{renderTextWithErrors()}
+				<div className="mb-10" id="quote">
+					<div className="text-5xl mb-4 text-gray-700">
+						{renderTextWithErrors()}
+					</div>
+					<p className="font-bold text-gray-700">- {author}</p>
 				</div>
+
 				<textarea
 					id="input"
 					className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -100,8 +108,17 @@ const App = () => {
 				></textarea>
 				{endTime && (
 					<div className="mt-4 flex flex-col">
+						<p>Words: {text.split(" ").length}</p>
+						<p>Characters: {text.length}</p>
+						<p>
+							Time: {(endTime - startTime) / 1000}" -{" "}
+							{(endTime - startTime) / 1000 / 60}'
+						</p>
 						<p className="text-green-500 text-lg text-center">
 							Words per minute: {wpm}
+						</p>
+						<p className="text-green-500 text-lg text-center">
+							Words per second: {wpm / 60}
 						</p>
 						<button
 							className="mt-4 bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
