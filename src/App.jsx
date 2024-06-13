@@ -19,6 +19,7 @@ const App = () => {
 			"https://api.quotable.io/random?maxLength=80"
 		);
 		const data = await response.json();
+		console.log(data);
 		setText(data.content);
 		resetGame();
 	};
@@ -83,7 +84,7 @@ const App = () => {
 		<div className="h-screen w-screen max-w-screen max-h-screen flex flex-col items-center justify-center bg-gray-100">
 			<h1 className="text-4xl mb-8 text-black">ago-type!</h1>
 			<div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-3/4 md:w-1/2">
-				<div className="text-lg mb-4 text-gray-700">
+				<div className="text-5xl mb-4 text-gray-700">
 					{renderTextWithErrors()}
 				</div>
 				<textarea
@@ -98,12 +99,12 @@ const App = () => {
 					onBlur={(e) => e.target.focus()} // Rimette il focus sulla textarea se si clicca fuori
 				></textarea>
 				{endTime && (
-					<div className="mt-4">
-						<p className="text-green-500 text-lg">
+					<div className="mt-4 flex flex-col">
+						<p className="text-green-500 text-lg text-center">
 							Words per minute: {wpm}
 						</p>
 						<button
-							className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+							className="mt-4 bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
 							onClick={fetchRandomSentence}
 							tabIndex="0" // Permette di cliccare il pulsante con il tasto Tab
 						>
