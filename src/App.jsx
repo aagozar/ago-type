@@ -107,17 +107,18 @@ const App = () => {
 					onBlur={(e) => e.target.focus()} // Rimette il focus sulla textarea se si clicca fuori
 				></textarea>
 				{endTime && (
-					<div className="flex flex-col">
+					<div className=" mt-10 flex flex-col">
+						<h1 className="text-4xl text-black">Statistics</h1>
 						<p>Words: {text.split(" ").length}</p>
 						<p>Characters: {text.length}</p>
 						<p>
 							Time: {(endTime - startTime) / 1000}" -{" "}
 							{(endTime - startTime) / 1000 / 60}'
 						</p>
-						<p className="text-green-500 text-lg text-center">
+						<p className="text-green-500 text-lg">
 							Words per minute: {wpm}
 						</p>
-						<p className="text-green-500 text-lg text-center">
+						<p className="text-green-500 text-lg">
 							Words per second: {wpm / 60}
 						</p>
 						<button
