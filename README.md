@@ -1,3 +1,3 @@
 # ago-type
 
-A simple typing game that tells yout WPM when done.
+A simple typing game that tells your WPM when done.
