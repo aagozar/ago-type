@@ -16,12 +16,9 @@ const App = () => {
 	}, []);
 
 	const fetchRandomSentence = async () => {
-		const response = await fetch(
-			"https://api.quotable.io/random?maxLength=100"
-		);
+		const response = await fetch("https://dummyjson.com/quotes/random");
 		const data = await response.json();
-		console.log(data);
-		setText(data.content);
+		setText(data.quote);
 		setAuthor(data.author);
 		resetGame();
 	};
